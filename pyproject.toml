@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "langflow-streamlit"
+version = "0.1.0"
+description = ""
+authors = ["YAITEC <contact@yaitec.org>"]
+maintainers = [
+    {name = "João Pedro M. C. Hluchan", email = "berrytern@gmail.com"}
+]
+license = "MIT"
+packages = [{include = "langflow_streamlit"}]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.13"
+streamlit = "^1.35.0"
+fastapi = "^0.111.0"
+python-dotenv = "^1.0.1"
+langflow = "^1.0.14"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
