@@ -12,4 +12,4 @@ API_PORT = int(os.getenv("API_PORT", "7881"))
 
 FOLDER_PATH = os.getenv("FOLDER_PATH", "./")
 
-LANGFLOW_ENABLED = os.getenv("LANGFLOW_ENABLED", "true").lower() in ["true", "1"]
+STREAMLIT_ONLY = os.getenv("STREAMLIT_ONLY", "false").lower() in ["true", "1"]
