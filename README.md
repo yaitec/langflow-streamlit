@@ -11,6 +11,24 @@
 ## Requirements
 
 - Python 3.10 or higher
+## Environment variables
+
+| VARIABLE | DESCRIPTION |	DEFAULT |
+|-----|-----|-----| 
+| STREAMLIT_ONLY | If True runs only streamlit and streamlit API, else runs langflow too | False |
+### How to set
+#### pip
+```
+langflow-streamlit --streamlit-only
+```
+#### make with zshell or bash
+```
+export STREAMLIT_ONLY=True
+```
+#### make powershell
+```
+$env:STREAMLIT_ONLY = "True"
+```
 
 ## Installation
 
@@ -54,6 +72,7 @@ pip install langflow-streamlit
   - The Streamlit chat runs on port 5001 by default.
   - The Streamlit API runs on port 7881 by default.
   - Langflow runs on port 7860 by default.
+  - You can set streamlit_only environment variable to runs with or without langflow.
 
 ### Using Poetry (after cloning the repository)
 
