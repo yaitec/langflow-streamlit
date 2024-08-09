@@ -50,6 +50,11 @@ pip install langflow-streamlit
    langflow-streamlit run --streamlit-only
    ```
 
+#### Notes
+  - The Streamlit chat runs on port 5001 by default.
+  - The Streamlit API runs on port 7881 by default.
+  - Langflow runs on port 7860 by default.
+
 ### Using Poetry (after cloning the repository)
 
 1. Run the full stack:
