@@ -9,3 +9,9 @@ clean_python_cache:
 start:
 	poetry install
 	poetry run python server.py
+
+build:
+	poetry build
+
+publish:
+	poetry publish
