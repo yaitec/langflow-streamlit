@@ -38,8 +38,6 @@ pip install langflow-streamlit
    poetry install
    ```
 
-## Usage
-
 ### Running the Application
 
 1. Run the full stack (Langflow, API, and Streamlit):
@@ -95,6 +93,26 @@ To set up the development environment:
    ```bash
    make lint
    ```
+
+## Usage
+###  How to get Streamlit's Flows from the store
+The gif below shows how to search, download, and run Streamlit's flow:
+<p align="center">
+  <img src="./docs/static/streamlit_how_to_get_flows.gif" alt="Your GIF" style="border: 3px solid #211C43;">
+</p>
+
+### Using Streamlit Components in Langflow
+The gif below shows how to use `Listen` and `Send` components:
+<p align="center">
+  <img src="./docs/static/streamlit_how_to_connect_components.gif" alt="Your GIF" style="border: 3px solid #211C43;">
+</p>
+
+### Streamlit's Components
+
+Langflow provides the following Streamlit components:
+
+- **[Send](./send.md)**: Send messages to a Streamlit chat session.
+- **[Listen](./listen.md)**: Listen for incoming messages in a Streamlit chat, altering the layout of the Streamlit application.
 
 ## Contributing
 
