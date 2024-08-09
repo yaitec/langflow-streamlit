@@ -9,7 +9,8 @@ maintainers = [
 ]
 license = "MIT"
 packages = [
-    {include = "langflow_streamlit"}
+    {include = "langflow_streamlit"},
+    {include = "langflow-streamlit"}
 ]
 readme = "README.md"
 

@@ -1,5 +1,4 @@
 import typer
-from typing import Optional
 
 app = typer.Typer()
 
@@ -21,16 +20,12 @@ def run(
         LangflowManager.start()
         wait_for_server_ready("localhost", settings.LANGFLOW_PORT)
         LOGGER.debug("Langflow is running!")
-        LOGGER.debug("Starting Streamlit frontend...")
-        StreamlitManager.start()
-        LOGGER.debug("All components are running.")
-    else:
-        APIManager.start()
-        wait_for_server_ready("localhost", settings.API_PORT)
-        LOGGER.debug("API backend is running!")
-        LOGGER.debug("Starting Streamlit frontend in Streamlit-only mode...")
-        StreamlitManager.start()
-        LOGGER.debug("Streamlit frontend is running. Langflow and API backend not started.")
+    APIManager.start()
+    wait_for_server_ready("localhost", settings.API_PORT)
+    LOGGER.debug("API backend is running!")
+    LOGGER.debug("Starting Streamlit frontend in Streamlit-only mode...")
+    StreamlitManager.start()
+    LOGGER.debug("Streamlit frontend is running. Langflow and API backend not started.")
 
 def app(args=None):
     typer_app = typer.Typer()
