@@ -4,10 +4,14 @@ version = "0.1.0"
 description = ""
 authors = ["YAITEC <contact@yaitec.org>"]
 maintainers = [
-    "João Pedro M. C. Hluchan <berrytern@gmail.com>"
+    "João Pedro M. C. Hluchan <berrytern@gmail.com>",
+    "João Oliveira <joao@yaitec.org>"
 ]
 license = "MIT"
-packages = [{include = "langflow_streamlit"}]
+packages = [
+    {include = "langflow_streamlit"},
+    {include = "langflow-streamlit"}
+]
 readme = "README.md"
 
 [tool.poetry.dependencies]
@@ -19,6 +23,8 @@ langflow = "^1.0.14"
 typer = "^0.12.3"
 httpx = "^0.27.0"
 
+[tool.poetry.scripts]
+langflow-streamlit = "langflow_streamlit.__main__:main"
 
 [build-system]
 requires = ["poetry-core"]

@@ -7,6 +7,7 @@ import multiprocessing
 LOGGER = logging.getLogger(__name__)
 
 class APIManager:
+    port = settings.API_PORT
 
     @classmethod
     def run_streamlit_api(cls):
@@ -27,7 +28,7 @@ class APIManager:
         config = uvicorn.Config(
             app,
             host="0.0.0.0",
-            port=settings.API_PORT,
+            port=cls.port,
             workers=1,
             log_level="error",
             reload=False,
@@ -38,7 +39,7 @@ class APIManager:
 
     @classmethod
     def start(cls, args=""):
-        if check_if_port_is_used_by_program(settings.API_PORT, ["python"]):
-            kill_process_on_port(settings.API_PORT)
+        if check_if_port_is_used_by_program(cls.port, ["python"]):
+            kill_process_on_port(cls.port)
         streamlit_api_process = multiprocessing.Process(target=cls.run_streamlit_api)
         streamlit_api_process.start()
