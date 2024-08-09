@@ -1,9 +1,15 @@
 import typer
+from typing import Optional
 
 app = typer.Typer()
 
-@app.command("run")
-def hello(langflow=True):
+@app.command()
+def run(
+    streamlit_only: bool = typer.Option(False, "--streamlit-only", help="Run only the Streamlit frontend (default: False)")
+):
+    """
+    Run the Langflow Streamlit application.
+    """
     from langflow_streamlit.managers import APIManager, LangflowManager, StreamlitManager
     from langflow_streamlit.utils.process_utils import wait_for_server_ready
     from langflow_streamlit.utils import settings
@@ -11,12 +17,22 @@ def hello(langflow=True):
 
     LOGGER = logging.getLogger(__name__)
 
-    if langflow:
+    if not streamlit_only:
         LangflowManager.start()
-    APIManager.start()
-    wait_for_server_ready("localhost", settings.API_PORT)
-    LOGGER.debug("streamlit backend is running!")
-    StreamlitManager.start()
+        wait_for_server_ready("localhost", settings.LANGFLOW_PORT)
+        LOGGER.debug("Langflow is running!")
+        LOGGER.debug("Starting Streamlit frontend...")
+        StreamlitManager.start()
+        LOGGER.debug("All components are running.")
+    else:
+        APIManager.start()
+        wait_for_server_ready("localhost", settings.API_PORT)
+        LOGGER.debug("API backend is running!")
+        LOGGER.debug("Starting Streamlit frontend in Streamlit-only mode...")
+        StreamlitManager.start()
+        LOGGER.debug("Streamlit frontend is running. Langflow and API backend not started.")
 
-if __name__ == "__main__":
-    app()
+def app(args=None):
+    typer_app = typer.Typer()
+    typer_app.command()(run)
+    typer_app(args)
