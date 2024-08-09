@@ -7,4 +7,5 @@ clean_python_cache:
 	@echo "$(GREEN)Python cache cleaned.$(NC)"
 
 start:
+	poetry install
 	poetry run python server.py
