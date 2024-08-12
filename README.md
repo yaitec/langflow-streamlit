@@ -1,16 +1,21 @@
-# langflow-streamlit
+# Langflow-Streamlit
 
-`langflow-streamlit` is an API that facilitates communication between [Langflow](https://github.com/logspace-ai/langflow) and [Streamlit](https://streamlit.io/) applications. This library enables seamless integration of Langflow's advanced language processing capabilities with Streamlit's user-friendly interface, allowing developers to create interactive applications that leverage powerful language models.
+`langflow-streamlit` is a powerful API that bridges the gap between [Langflow](https://github.com/logspace-ai/langflow) and [Streamlit](https://streamlit.io/) applications. This library seamlessly integrates Langflow's advanced language processing capabilities with Streamlit's user-friendly interface, enabling developers to create interactive applications that harness the power of sophisticated language models.
+
+**Important:** To use this library effectively, you need to set up a Langflow Store Key. This key allows you to access and use flows and components from the Langflow Store. For more information on setting up your Langflow Store Key, please refer to the [Langflow documentation](https://docs.langflow.org/configuration-api-keys).
 
 ## Features
 
-- **Easy integration:** Quickly set up communication between Langflow and Streamlit with minimal configuration.
-- **Simple deployment:** Easily install and run the API with `pip` or `poetry`.
-- **Flexible execution:** Run the full stack (Langflow + streamlit API) or just the Streamlit frontend with API backend.
+- **Seamless Integration:** Effortlessly establish communication between Langflow and Streamlit with minimal configuration.
+- **Streamlined Deployment:** Quickly install and run the API using either `pip` or `poetry`.
+- **Flexible Execution Options:** Choose to run the full stack (Langflow + Streamlit API) or just the Streamlit backend with API.
+- **Langflow Store Integration:** Access and utilize pre-built flows and Streamlit components from the Langflow Store to enhance your applications.
 
 ## Requirements
 
 - Python 3.10 or higher
+- Langflow
+- Streamlit
 ## Installation
 
 ### Option 1: Install via pip
@@ -46,10 +51,12 @@ pip install langflow-streamlit==0.1.7
    python -m langflow-streamlit run
    ```
 
-2. Run only the Streamlit frontend and API backend:
+2. Run only the Streamlit backend and API:
    ```bash
    python -m langflow-streamlit run --streamlit-only
    ```
+
+Note: Running only the Streamlit backend is useful when you want to use Langflow-created flows in your Streamlit application without running the full Langflow instance.
 
 ---
 
@@ -73,45 +80,56 @@ The gif below shows how to use `Listen` and `Send` components:
 </p>
 
 
-### Streamlit's Components
+### Streamlit Components
 
-Langflow provides the following Streamlit components:
+Langflow provides pre-built Streamlit components that can be accessed through the Langflow store. These components enhance your Streamlit applications with powerful functionality:
 
 - **[Send](./send.md)**: Send messages to a Streamlit chat session.
-- **[Listen](./listen.md)**: Listen for incoming messages in a Streamlit chat, altering the layout of the Streamlit application.
+- **[Listen](./listen.md)**: Listen for incoming messages in a Streamlit chat, dynamically altering the layout of the Streamlit application.
+
+To use these components:
+1. Access the Langflow store within your Langflow instance.
+2. Search for and download the desired Streamlit component.
+3. Integrate the component into your Langflow workflow.
+4. Connect the component to your Streamlit application using the `langflow-streamlit` API.
+
+For detailed instructions on using Streamlit components, refer to the [Usage](#usage) section below.
 
 ---
 
-## Environment variables
+## Environment Variables
 
-| VARIABLE       | DESCRIPTION                                                  | DEFAULT |
-| -------------- | ------------------------------------------------------------ | ------- |
-| STREAMLIT_ONLY | If True runs only streamlit and streamlit API, else runs langflow too | False   |
+| Variable       | Description                                                   | Default |
+|----------------|---------------------------------------------------------------|---------|
+| STREAMLIT_ONLY | If True, runs only Streamlit and Streamlit API; else, runs Langflow too | False   |
 
-#### pip
+### Setting Environment Variables
 
-```
+#### Using pip
+
+```bash
 langflow-streamlit --streamlit-only
 ```
 
-#### make with zshell or bash
+#### Using zsh or bash
 
-```
+```bash
 export STREAMLIT_ONLY=True
 ```
 
-#### make powershell
+#### Using PowerShell
 
-```
+```powershell
 $env:STREAMLIT_ONLY = "True"
 ```
 
-#### Notes
+### Default Ports
 
-  - The Streamlit chat runs on port 5001 by default.
-  - The Streamlit API runs on port 7881 by default.
-  - Langflow runs on port 7860 by default.
-  - You can set streamlit_only environment variable to runs with or without langflow.
+- Streamlit chat: 5001
+- Streamlit API: 7881
+- Langflow: 7860
+
+**Note:** You can set the `STREAMLIT_ONLY` environment variable to run with or without Langflow.
 
 ### Using Poetry (after cloning the repository)
 
@@ -125,7 +143,7 @@ $env:STREAMLIT_ONLY = "True"
    poetry run langflow-streamlit run --streamlit-only
    ```
 
-### Using Make commands
+### Using Make Commands
 
 1. Run the full stack:
    ```bash
@@ -159,7 +177,7 @@ To set up the development environment:
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request or open an Issue on the GitHub repository.
+We welcome contributions! Please feel free to submit a Pull Request or open an Issue on the GitHub repository.
 
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
@@ -176,3 +194,7 @@ This project is licensed under the MIT License. See the [LICENSE](./LICENSE) fil
 YAITEC - contact@yaitec.org
 
 Project Link: [https://github.com/yaitec/langflow-streamlit](https://github.com/yaitec/langflow-streamlit)
+
+---
+
+For more detailed information on specific components and usage, please refer to the documentation in the `docs` directory.
