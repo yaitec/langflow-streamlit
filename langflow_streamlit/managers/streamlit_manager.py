@@ -25,7 +25,7 @@ class StreamlitManager:
     @classmethod
     def run_streamlit(cls, args):
         if run(
-            f"poetry run streamlit run {cls.path}streamlit.py --browser.serverPort {cls.port} --server.port {cls.port} {args}",
+            f"poetry run streamlit run {cls.path}streamlit.py --browser.serverPort {cls.port} --server.port {cls.port} --server.headless {args}",
             shell=True,
             stdout=PIPE,
         ).returncode != 0:
