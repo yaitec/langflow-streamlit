@@ -16,7 +16,7 @@
 ### Option 1: Install via pip
 
 ```bash
-python -m venv env
+python3 -m venv env
 source env/bin/activate
 pip install langflow-streamlit==0.1.5
 ```
