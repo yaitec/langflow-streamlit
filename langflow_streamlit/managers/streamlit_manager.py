@@ -23,9 +23,22 @@ class StreamlitManager:
                     file.truncate()
 
     @classmethod
+    def ignore_email(cls):
+        import os
+        from os.path import exists, isfile, expanduser
+
+        streamlit_config_path = expanduser("~")+ "/.streamlit"
+        if not exists(streamlit_config_path):
+            os.makedirs(streamlit_config_path)
+        if not isfile(streamlit_config_path+"/credentials.toml"):
+            with open(streamlit_config_path+"/credentials.toml", "w") as f:
+                f.write('[general]\nemail = ""')
+
+    @classmethod
     def run_streamlit(cls, args):
+        cls.ignore_email()
         if run(
-            f"poetry run streamlit run {cls.path}streamlit.py --browser.serverPort {cls.port} --server.port {cls.port} --server.headless {args}",
+            f"streamlit run {cls.path}streamlit.py --browser.serverPort {cls.port} --server.port {cls.port} {args}",
             shell=True,
             stdout=PIPE,
         ).returncode != 0:
