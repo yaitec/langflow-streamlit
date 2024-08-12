@@ -6,35 +6,18 @@
 
 - **Easy integration:** Quickly set up communication between Langflow and Streamlit with minimal configuration.
 - **Simple deployment:** Easily install and run the API with `pip` or `poetry`.
-- **Flexible execution:** Run the full stack or just the Streamlit frontend with API backend.
+- **Flexible execution:** Run the full stack (Langflow + streamlit API) or just the Streamlit frontend with API backend.
 
 ## Requirements
 
 - Python 3.10 or higher
-## Environment variables
-
-| VARIABLE | DESCRIPTION |	DEFAULT |
-|-----|-----|-----| 
-| STREAMLIT_ONLY | If True runs only streamlit and streamlit API, else runs langflow too | False |
-### How to set
-#### pip
-```
-langflow-streamlit --streamlit-only
-```
-#### make with zshell or bash
-```
-export STREAMLIT_ONLY=True
-```
-#### make powershell
-```
-$env:STREAMLIT_ONLY = "True"
-```
-
 ## Installation
 
 ### Option 1: Install via pip
 
 ```bash
+python -m venv env
+source env/bin/activate
 pip install langflow-streamlit
 ```
 
@@ -60,15 +43,71 @@ pip install langflow-streamlit
 
 1. Run the full stack (Langflow, API, and Streamlit):
    ```bash
-   langflow-streamlit run
+   python -m langflow-streamlit run
    ```
 
 2. Run only the Streamlit frontend and API backend:
    ```bash
-   langflow-streamlit run --streamlit-only
+   python -m langflow-streamlit run --streamlit-only
    ```
 
+---
+
+## Usage
+
+###  How to get Streamlit's Flows from the store
+
+The gif below shows how to search, download, and run Streamlit's flow:
+
+<p align="center">
+  <img src="./docs/static/streamlit_how_to_get_flows.gif" alt="Your GIF" style="border: 3px solid #211C43;">
+</p>
+
+
+### Using Streamlit Components in Langflow
+
+The gif below shows how to use `Listen` and `Send` components:
+
+<p align="center">
+  <img src="./docs/static/streamlit_how_to_connect_components.gif" alt="Your GIF" style="border: 3px solid #211C43;">
+</p>
+
+
+### Streamlit's Components
+
+Langflow provides the following Streamlit components:
+
+- **[Send](./send.md)**: Send messages to a Streamlit chat session.
+- **[Listen](./listen.md)**: Listen for incoming messages in a Streamlit chat, altering the layout of the Streamlit application.
+
+---
+
+## Environment variables
+
+| VARIABLE       | DESCRIPTION                                                  | DEFAULT |
+| -------------- | ------------------------------------------------------------ | ------- |
+| STREAMLIT_ONLY | If True runs only streamlit and streamlit API, else runs langflow too | False   |
+
+#### pip
+
+```
+langflow-streamlit --streamlit-only
+```
+
+#### make with zshell or bash
+
+```
+export STREAMLIT_ONLY=True
+```
+
+#### make powershell
+
+```
+$env:STREAMLIT_ONLY = "True"
+```
+
 #### Notes
+
   - The Streamlit chat runs on port 5001 by default.
   - The Streamlit API runs on port 7881 by default.
   - Langflow runs on port 7860 by default.
@@ -117,26 +156,6 @@ To set up the development environment:
    ```bash
    make lint
    ```
-
-## Usage
-###  How to get Streamlit's Flows from the store
-The gif below shows how to search, download, and run Streamlit's flow:
-<p align="center">
-  <img src="./docs/static/streamlit_how_to_get_flows.gif" alt="Your GIF" style="border: 3px solid #211C43;">
-</p>
-
-### Using Streamlit Components in Langflow
-The gif below shows how to use `Listen` and `Send` components:
-<p align="center">
-  <img src="./docs/static/streamlit_how_to_connect_components.gif" alt="Your GIF" style="border: 3px solid #211C43;">
-</p>
-
-### Streamlit's Components
-
-Langflow provides the following Streamlit components:
-
-- **[Send](./send.md)**: Send messages to a Streamlit chat session.
-- **[Listen](./listen.md)**: Listen for incoming messages in a Streamlit chat, altering the layout of the Streamlit application.
 
 ## Contributing
 
