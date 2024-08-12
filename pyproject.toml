@@ -12,6 +12,11 @@ packages = [
     {include = "langflow_streamlit"},
     {include = "langflow-streamlit"}
 ]
+
+include = [
+    "pyproject.toml",
+]
+
 readme = "README.md"
 
 [tool.poetry.dependencies]
