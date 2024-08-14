@@ -1,7 +1,7 @@
 from langflow_streamlit.utils.process_utils import check_if_port_is_used_by_program, kill_process_on_port
-from langflow_streamlit.utils import settings
+from langflow_streamlit.utils import settings, LOGGER
 from subprocess import run, PIPE
-import threading
+import multiprocessing
 import os
 
 
@@ -36,21 +36,28 @@ class StreamlitManager:
 
     @classmethod
     def run_streamlit(cls, args):
-        cls.ignore_email()
-        if run(
-            f"streamlit run {cls.path}streamlit.py --browser.serverPort {cls.port} --server.port {cls.port} {args}",
-            shell=True,
-            stdout=PIPE,
-        ).returncode != 0:
-            raise Exception("Streamlit startup failed.")
+        try:
+            cls.ignore_email()
+            exec_result = run(
+                f"streamlit run {cls.path}streamlit.py --browser.serverPort {cls.port} --server.port {cls.port} {args}",
+                shell=True,
+                stdout=PIPE,
+                stderr=PIPE,
+            )
+            if exec_result.returncode != 0:
+                LOGGER.error(f"Streamlit startup failed. stderr: {exec_result.stderr} stdout: {exec_result.stdout}")
+                raise Exception("Streamlit startup failed.")
+        except KeyboardInterrupt:
+            LOGGER.info("Shutting down streamlit")
 
     @classmethod
     def start(cls, args="--server.headless false"):
         if check_if_port_is_used_by_program(cls.port, ["streamlit"]):
             kill_process_on_port(cls.port)
         cls.__load_streamlit()
-        streamlit_thread = threading.Thread(target=cls.run_streamlit, args=(args,))
-        streamlit_thread.start()
+        process = multiprocessing.Process(target=cls.run_streamlit, args=(args,))
+        process.start()
+        return process
 
     @classmethod
     def restart(cls):
