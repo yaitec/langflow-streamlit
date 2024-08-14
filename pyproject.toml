@@ -31,6 +31,17 @@ httpx = "^0.27.0"
 [tool.poetry.scripts]
 langflow-streamlit = "langflow_streamlit.__main__:main"
 
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.2"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.mypy]
+plugins = ["pydantic.mypy"]
+follow_imports = "skip"
+disable_error_code = ["type-var"]
+namespace_packages = true
+mypy_path = "langflow"
+ignore_missing_imports = true

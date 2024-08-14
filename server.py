@@ -6,7 +6,7 @@ if __name__ == "__main__":
         from langflow_streamlit.utils.process_utils import wait_for_server_ready
         from langflow_streamlit.utils import settings, LOGGER, logger_set_level, generate_log
 
-        if settings.GENERATE_LOG_FILE:
+        if settings.LOG_FILE_GENERATION:
             generate_log()
         else:
             logger_set_level(settings.LOG_LEVEL)

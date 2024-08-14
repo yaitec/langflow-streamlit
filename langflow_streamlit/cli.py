@@ -1,13 +1,18 @@
-from typing import Union
 import typer
 
-app = typer.Typer()
+from enum import Enum
 
-@app.command()
+class LogLevelEnum(Enum):
+    CRITICAL = "critical"
+    ERROR = "error"
+    WARNING = "warning"
+    INFO = "info"
+    DEBUG = "debug"
+
 def run(
     streamlit_only: bool = typer.Option(False, "--streamlit-only", help="Run only the Streamlit frontend (default: False)"),
-    log_level: Union["critical", "error", "warning", "info", "debug"] = typer.Option("info", "--log-level", help="Define log level of library(default: 'info')"),
-    generate_log_file: bool = typer.Option("--generate-log-file", help="Create a langflow-streamlit.log file to debug purpose(default: False)")
+    log_level: LogLevelEnum = typer.Option("info", "--log-level", help="Defines log level of library(default: 'info')"),
+    log_file_generation: bool = typer.Option(False, "--log-file-generation", help="Creates a langflow-streamlit.log file to debug purpose(default: False)")
 ):
     """
     Run the Langflow Streamlit application.
@@ -16,10 +21,10 @@ def run(
     from langflow_streamlit.utils.process_utils import wait_for_server_ready
     from langflow_streamlit.utils import settings, LOGGER, logger_set_level, generate_log
     
-    if generate_log_file:
+    if log_file_generation:
         generate_log()
     else:
-        logger_set_level(log_level)
+        logger_set_level(log_level.value)
 
     try:
         processes = []
