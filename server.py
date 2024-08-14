@@ -21,6 +21,7 @@ if __name__ == "__main__":
         processes.append(APIManager.start())
         wait_for_server_ready("localhost", settings.API_PORT)
         LOGGER.debug("streamlit backend is running!")
+        LOGGER.debug("Starting Streamlit frontend.")
         processes.append(StreamlitManager.start())
         [process.join() for process in processes]
     except KeyboardInterrupt:

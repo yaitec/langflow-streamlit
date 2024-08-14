@@ -10,13 +10,14 @@ class LangflowManager:
     @classmethod
     def run_langflow(cls, args):
         try:
-            if run(
+            exec_result = run(
                 f"langflow run {args}",
                 shell=True,
                 stdout=PIPE,
                 stderr=PIPE,
-            ).returncode != 0:
-                raise Exception("langflow startup failed.")
+            )
+            if exec_result.returncode != 0:
+                LOGGER.error(f"Langflow startup failed. stderr: {exec_result.stderr} stdout: {exec_result.stdout}")
         except KeyboardInterrupt:
             LOGGER.info("Shutting down langflow")
     @classmethod

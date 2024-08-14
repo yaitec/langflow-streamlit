@@ -25,8 +25,11 @@ def run(
         processes = []
         if not streamlit_only:
             processes.append(LangflowManager.start())
-            wait_for_server_ready("localhost", settings.LANGFLOW_PORT, 20)
-            LOGGER.debug("Langflow is running!")
+            if wait_for_server_ready("localhost", settings.LANGFLOW_PORT, settings.LANGFLOW_STARTUP_TIMEOUT):
+                LOGGER.debug("Langflow is running!")
+            else:
+                LOGGER.info("Langflow was not started on the given time! try to increase the environment variable LANGFLOW_STARTUP_TIMEOUT")
+                exit(1)
         processes.append(APIManager.start())
         wait_for_server_ready("localhost", settings.API_PORT)
         LOGGER.debug("API backend is running!")

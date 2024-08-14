@@ -46,7 +46,6 @@ class StreamlitManager:
             )
             if exec_result.returncode != 0:
                 LOGGER.error(f"Streamlit startup failed. stderr: {exec_result.stderr} stdout: {exec_result.stdout}")
-                raise Exception("Streamlit startup failed.")
         except KeyboardInterrupt:
             LOGGER.info("Shutting down streamlit")
 

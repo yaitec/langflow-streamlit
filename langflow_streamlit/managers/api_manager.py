@@ -36,6 +36,8 @@ class APIManager:
             loop.run_forever()
         except KeyboardInterrupt:
             LOGGER.info("Shutting down streamlit api")
+        except BaseException as err:
+            LOGGER.error(f"Unexpected shutdown of streamlit api. err: {err}")
 
     @classmethod
     def start(cls, args=""):
