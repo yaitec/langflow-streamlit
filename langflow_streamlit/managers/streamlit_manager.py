@@ -1,13 +1,16 @@
 from langflow_streamlit.utils.process_utils import check_if_port_is_used_by_program, kill_process_on_port
 from langflow_streamlit.utils import settings
 from subprocess import run, PIPE
-import threading
+from time import sleep
+import multiprocessing
+import logging
 import os
 
 
 class StreamlitManager:
     port = settings.STREAMLIT_PORT
     path = settings.FOLDER_PATH
+    logger = logging.getLogger(__name__)
 
     @classmethod
     def __load_streamlit(cls):
@@ -21,6 +24,16 @@ class StreamlitManager:
                     file.seek(0)
                     file.write("import streamlit as st\nfrom time import sleep\nwhile True:\n    sleep(2)")
                     file.truncate()
+
+    @classmethod
+    def is_running(cls):
+        for _ in range(10):
+            sleep(1)
+            if check_if_port_is_used_by_program(cls.port, ["streamlit"]):
+                cls.logger.info(f"Streamlit server is listening http://0.0.0.0:{cls.port}")
+                return True
+        return False
+
 
     @classmethod
     def ignore_email(cls):
@@ -45,12 +58,20 @@ class StreamlitManager:
             raise Exception("Streamlit startup failed.")
 
     @classmethod
-    def start(cls, args="--server.headless false"):
+    def start(cls, headless=False):
         if check_if_port_is_used_by_program(cls.port, ["streamlit"]):
             kill_process_on_port(cls.port)
         cls.__load_streamlit()
-        streamlit_thread = threading.Thread(target=cls.run_streamlit, args=(args,))
-        streamlit_thread.start()
+        streamlit_process = multiprocessing.Process(target=cls.run_streamlit, args=(f"--server.headless {str(headless).lower()}",))
+        streamlit_process.start()
+
+        if not cls.is_running():
+            streamlit_process.kill()
+            streamlit_process = multiprocessing.Process(target=cls.run_streamlit, args=(f"--server.headless true",))
+            streamlit_process.start()
+        if not cls.is_running():
+            cls.logger.error("Streamlit did not start up")
+
 
     @classmethod
     def restart(cls):

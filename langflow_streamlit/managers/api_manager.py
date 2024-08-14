@@ -1,10 +1,7 @@
 from langflow_streamlit.utils.process_utils import check_if_port_is_used_by_program, kill_process_on_port
 from langflow_streamlit.utils import settings
-import logging
 import multiprocessing
 
-
-LOGGER = logging.getLogger(__name__)
 
 class APIManager:
     port = settings.API_PORT
