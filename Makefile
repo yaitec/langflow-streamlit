@@ -1,4 +1,4 @@
-.PHONY: start start-streamlit-only
+.PHONY: lint test start start-streamlit-only
 
 
 clean_python_cache:
@@ -35,11 +35,12 @@ test:
 	poetry install --with dev
 	poetry run pytest tests/
 
-## lint: run linters
+## lint: Run linters
 lint:
 	poetry install --with dev
 	poetry run mypy --namespace-package -p "langflow_streamlit"
 
+## build: Builds an installable package
 build:
 	poetry build
 

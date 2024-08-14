@@ -44,6 +44,9 @@ pip install langflow-streamlit==0.1.8
 
 ### Running the Application
 
+<details>
+<summary>If choose <a href="#option-1-install-via-pip">pip installation</a> option</summary>
+
 1. Run the full stack (Langflow, API, and Streamlit):
    ```bash
    python -m langflow-streamlit run
@@ -53,6 +56,22 @@ pip install langflow-streamlit==0.1.8
    ```bash
    python -m langflow-streamlit run --streamlit-only
    ```
+</details>
+
+<details>
+<summary>If choose <a href="#option-2-clone-the-repository-and-use-poetry">clone the repository</a> option</summary>
+
+1. Run the full stack (Langflow, API, and Streamlit):
+   ```bash
+   make start
+   ```
+
+2. Run only the Streamlit backend and API:
+   ```bash
+   make start-streamlit-only
+   ```
+</details>
+<br/>
 
 **Note:** Running only the Streamlit backend is useful when you want to use Langflow-created flows in your Streamlit application without running the full Langflow instance.
 #### Default Ports
@@ -109,10 +128,10 @@ For detailed instructions on using Streamlit components, refer to the [Usage](#u
 | LOG_FILE_GENERATION | If True, creates a langflow-streamlit.log file for debug purpose and override LOG_LEVEL to 'debug' | False |
 
 ### Setting Environment Variables
-You can learn how to set environment variables for each alternative bellow, click in the arrow that correlated to installation option that you choosed and check how to setup it properly. 
+You can learn how to set environment variables for each alternative bellow, click in the arrow that correlated to installation option that you choosed and check how to setup it properly.
 
 <details>
-<summary>If choose <a href="#option-2-clone-the-repository-and-use-poetry">pip installation</a> option</summary>
+<summary>If choose <a href="#option-1-install-via-pip">pip installation</a> option</summary>
 these are the options that you can set:
 
    ```bash
@@ -161,7 +180,7 @@ these are the options that you can set:
    ```bash
    make start-streamlit-only
    ```
-3. check the other commands available:
+3. Check the other available commands:
    ```bash
    make help
    ```
