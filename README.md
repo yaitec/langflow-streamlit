@@ -1,4 +1,15 @@
-# Langflow-Streamlit
+# Langflow Streamlit Integration
+
+## Table of Contents
+1. [Introduction](#introduction)
+2. [Installation](#installation)
+3. [How to run](#how-to-run)
+4. [Starter Projects](#starter-projects)
+   1. [How to get Streamlit's Flows from the store](#how-to-get-streamlits-flows-from-the-store)
+   2. [Using Streamlit Components in Langflow](#using-streamlit-components-in-langflow)
+5. [Contributing](#contributing)
+6. [License](#license)
+7. [Contact](#contact)
 
 `langflow-streamlit` is a powerful API that bridges the gap between [Langflow](https://github.com/logspace-ai/langflow) and [Streamlit](https://streamlit.io/) applications. This library seamlessly integrates Langflow's advanced language processing capabilities with Streamlit's user-friendly interface, enabling developers to create interactive applications that harness the power of sophisticated language models.
 
@@ -42,7 +53,7 @@ pip install langflow-streamlit==0.1.8
    poetry install
    ```
 
-### Running the Application
+### How to run
 
 <details>
 <summary>If choose <a href="#option-1-install-via-pip">pip installation</a> option</summary>
@@ -82,7 +93,7 @@ pip install langflow-streamlit==0.1.8
 
 ---
 
-## Usage
+## Starter Projects
 
 ###  How to get Streamlit's Flows from the store
 
