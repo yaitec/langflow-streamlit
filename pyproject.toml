@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "langflow-streamlit"
-version = "0.1.7"
+version = "0.1.8a0"
 description = ""
 authors = ["YAITEC <contact@yaitec.org>"]
 maintainers = [
