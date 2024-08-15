@@ -34,7 +34,7 @@
 ```bash
 python3 -m venv env
 source env/bin/activate
-pip install langflow-streamlit==0.1.8
+pip install langflow-streamlit==0.1.8a1
 ```
 
 ### Option 2: Clone the repository and use Poetry
@@ -87,11 +87,12 @@ pip install langflow-streamlit==0.1.8
 <br/>
 
 **Note:** Running only the Streamlit backend is useful when you want to use Langflow-created flows in your Streamlit application without running the full Langflow instance.
-#### Default Ports
 
-- Streamlit chat: 5001
-- Streamlit API: 7881
-- Langflow: 7860
+#### How to open each aplication(after running the project)
+
+- `Streamlit chat` should be running on default port 5001 and click [here](http://localhost:5001) to access in your browser.
+- `Streamlit API` should be running on default port 7881 and click [here](http://localhost:7881/docs) to access it's docs in your browser.
+- `Langflow` should be running on default port 7860 and click [here](http://localhost:7860) to access in your browser.
 
 ---
 
