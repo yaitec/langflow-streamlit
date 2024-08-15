@@ -1,5 +1,18 @@
-# Langflow-Streamlit
+# Langflow Streamlit Integration
 
+## Table of Contents
+1. [Introduction](#introduction)
+2. [Installation](#installation)
+3. [How to run](#how-to-run)
+4. [Starter Projects](#starter-projects)
+   1. [How to get Streamlit's Flows from the store](#how-to-get-streamlits-flows-from-the-store)
+   2. [Using Streamlit Components in Langflow](#using-streamlit-components-in-langflow)
+   3. [Streamlit Components](#streamlit-components)
+5. [Contributing](#contributing)
+6. [License](#license)
+7. [Contact](#contact)
+
+## Introduction
 `langflow-streamlit` is a powerful API that bridges the gap between [Langflow](https://github.com/logspace-ai/langflow) and [Streamlit](https://streamlit.io/) applications. This library seamlessly integrates Langflow's advanced language processing capabilities with Streamlit's user-friendly interface, enabling developers to create interactive applications that harness the power of sophisticated language models.
 
 **Important:** To use this library effectively, you need to set up a Langflow Store Key. This key allows you to access and use flows and components from the Langflow Store. For more information on setting up your Langflow Store Key, please refer to the [Langflow documentation](https://docs.langflow.org/configuration-api-keys).
@@ -14,8 +27,6 @@
 ## Requirements
 
 - Python 3.10 or higher
-- Langflow
-- Streamlit
 ## Installation
 
 ### Option 1: Install via pip
@@ -23,7 +34,7 @@
 ```bash
 python3 -m venv env
 source env/bin/activate
-pip install langflow-streamlit==0.1.7
+pip install langflow-streamlit==0.1.8
 ```
 
 ### Option 2: Clone the repository and use Poetry
@@ -44,7 +55,10 @@ pip install langflow-streamlit==0.1.7
    poetry install
    ```
 
-### Running the Application
+### How to run
+
+<details>
+<summary>If choose <a href="#option-1-install-via-pip">pip installation</a> option</summary>
 
 1. Run the full stack (Langflow, API, and Streamlit):
    ```bash
@@ -55,12 +69,33 @@ pip install langflow-streamlit==0.1.7
    ```bash
    python -m langflow-streamlit run --streamlit-only
    ```
+</details>
 
-Note: Running only the Streamlit backend is useful when you want to use Langflow-created flows in your Streamlit application without running the full Langflow instance.
+<details>
+<summary>If choose <a href="#option-2-clone-the-repository-and-use-poetry">clone the repository</a> option</summary>
+
+1. Run the full stack (Langflow, API, and Streamlit):
+   ```bash
+   make start
+   ```
+
+2. Run only the Streamlit backend and API:
+   ```bash
+   make start-streamlit-only
+   ```
+</details>
+<br/>
+
+**Note:** Running only the Streamlit backend is useful when you want to use Langflow-created flows in your Streamlit application without running the full Langflow instance.
+#### Default Ports
+
+- Streamlit chat: 5001
+- Streamlit API: 7881
+- Langflow: 7860
 
 ---
 
-## Usage
+## Starter Projects
 
 ###  How to get Streamlit's Flows from the store
 
@@ -102,34 +137,38 @@ For detailed instructions on using Streamlit components, refer to the [Usage](#u
 | Variable       | Description                                                   | Default |
 |----------------|---------------------------------------------------------------|---------|
 | STREAMLIT_ONLY | If True, runs only Streamlit and Streamlit API; else, runs Langflow too | False   |
+| LOG_LEVEL | Defines log level of library | "info" |
+| LOG_FILE_GENERATION | If True, creates a langflow-streamlit.log file for debug purpose and override LOG_LEVEL to 'debug' | False |
 
 ### Setting Environment Variables
+You can learn how to set environment variables for each alternative bellow, click in the arrow that correlated to installation option that you choosed and check how to setup it properly.
 
-#### Using pip
+<details>
+<summary>If choose <a href="#option-1-install-via-pip">pip installation</a> option</summary>
+these are the options that you can set:
 
-```bash
-langflow-streamlit --streamlit-only
-```
+   ```bash
+   langflow-streamlit --streamlit-only --log-level error --log-file-generation
+   ```
+</details>
+<details>
+<summary>If choose <a href="#option-2-clone-the-repository-and-use-poetry">clone the repository</a> option</summary>
 
-#### Using zsh or bash
+- Setting it in zsh or bash
 
-```bash
-export STREAMLIT_ONLY=True
-```
+   ```bash
+   export STREAMLIT_ONLY=True LOG_LEVEL=debug LOG_FILE_GENERATION=True
+   ```
 
-#### Using PowerShell
+- Setting it in PowerShell
 
-```powershell
-$env:STREAMLIT_ONLY = "True"
-```
+   ```powershell
+   $env:STREAMLIT_ONLY = "True"
+   $env:LOG_LEVEL = "debug"
+   $env:LOG_FILE_GENERATION = "True"
+   ```
 
-### Default Ports
-
-- Streamlit chat: 5001
-- Streamlit API: 7881
-- Langflow: 7860
-
-**Note:** You can set the `STREAMLIT_ONLY` environment variable to run with or without Langflow.
+</details> 
 
 ### Using Poetry (after cloning the repository)
 
@@ -154,12 +193,20 @@ $env:STREAMLIT_ONLY = "True"
    ```bash
    make start-streamlit-only
    ```
+3. Check the other available commands:
+   ```bash
+   make help
+   ```
 
 ## Development
 
 To set up the development environment:
 
 1. Clone the repository (if you haven't already).
+2. Enter inside the cloned repository directory.
+   ```bash
+   cd <repository_path>
+   ```
 2. Install development dependencies:
    ```bash
    poetry install --with dev
@@ -195,6 +242,3 @@ YAITEC - contact@yaitec.org
 
 Project Link: [https://github.com/yaitec/langflow-streamlit](https://github.com/yaitec/langflow-streamlit)
 
----
-
-For more detailed information on specific components and usage, please refer to the documentation in the `docs` directory.
