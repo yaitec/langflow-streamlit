@@ -31,16 +31,15 @@ def run(
         if not streamlit_only:
             processes.append(LangflowManager.start())
             if wait_for_server_ready("localhost", settings.LANGFLOW_PORT, settings.LANGFLOW_STARTUP_TIMEOUT):
-                LOGGER.debug("Langflow is running!")
+                LOGGER.info(f"Langflow is running and listening on http://localhost:{settings.LANGFLOW_PORT}")
             else:
                 LOGGER.info("Langflow was not started on the given time! try to increase the environment variable LANGFLOW_STARTUP_TIMEOUT")
                 exit(1)
         processes.append(APIManager.start())
         wait_for_server_ready("localhost", settings.API_PORT)
-        LOGGER.debug("API backend is running!")
-        LOGGER.debug("Starting Streamlit frontend.")
+        LOGGER.info(f"API backend is running and listening on http://localhost:{settings.API_PORT}/docs")
         processes.append(StreamlitManager.start())
-        LOGGER.debug("Streamlit frontend is running.")
+        LOGGER.info(f"Streamlit frontend is running and listening on http://localhost:{StreamlitManager.port}")
         [process.join() for process in processes]
     except KeyboardInterrupt:
         LOGGER.debug("Exiting...")

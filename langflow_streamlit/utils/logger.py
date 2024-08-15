@@ -1,10 +1,13 @@
 from langflow_streamlit.utils import default
+from rich.console import Console
+from rich.logging import RichHandler
 import logging
 import sys
 
 LOGGER = logging.getLogger("langflow-streamlit")
 
-handler = logging.StreamHandler(sys.stdout)
+console = Console()
+handler = RichHandler(console=console)
 handler.setLevel(logging.DEBUG)
 
 LOGGER.addHandler(handler)
