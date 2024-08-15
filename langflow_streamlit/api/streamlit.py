@@ -1,3 +1,4 @@
+from typing import Any, Dict, Union
 from fastapi import APIRouter, Response
 from asyncio import get_running_loop, Future, wait_for
 from json import dumps, loads
@@ -10,10 +11,10 @@ import os
 router = APIRouter(tags=["Streamlit"])
 
 path = settings.FOLDER_PATH
-base_chat_data = {"messages": [], "type": None}
+base_chat_data: Dict[str, Any] = {"messages": [], "type": None}
 last_message = None
 
-chat = {}
+chat: Dict[str, Any] = {}
 
 pending_message = None
 
@@ -50,7 +51,7 @@ async def listen_message(timeout: int = 60 * 2):
     if pending_message is None or pending_message.done():
         loop = get_running_loop()
         pending_message = Future(loop=loop)
-        result = await wait_for(pending_message, timeout)
+        result: Union[Dict[str, Any], str] = await wait_for(pending_message, timeout)
         return Response(dumps(result), headers={"Content-Type": "application/json"})
     return Response(None, status_code=204)
 
@@ -115,8 +116,8 @@ async def get_sessions():
 def create_chat(model: ChatModel):
     from langflow_streamlit.templates import chat_template
 
-    ai_avatar = f'"{model.ai_avatar}"' if model.ai_avatar else "None"
-    user_avatar = f'"{model.user_avatar}"' if model.user_avatar else "None"
+    ai_avatar: str = f'"{model.ai_avatar}"' if model.ai_avatar else "None"
+    user_avatar: str = f'"{model.user_avatar}"' if model.user_avatar else "None"
     streamlit_code = chat_template.format(
         title=model.title,
         ai_avatar=ai_avatar,

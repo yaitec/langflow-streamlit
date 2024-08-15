@@ -1,22 +1,24 @@
 from subprocess import run, PIPE
-import logging
+from langflow_streamlit.utils import LOGGER
 import httpx
 import time
 import sys
 
-LOGGER = logging.getLogger(__name__)
 
-
-def wait_for_server_ready(host, port):
+def wait_for_server_ready(host, port, attempts=10):
     """
     Wait for the server to become ready by polling the health endpoint.
     """
     status_code = 0
-    while status_code != 200:
+    for _ in range(attempts):
         try:
             status_code = httpx.get(f"http://{host}:{port}/health").status_code
+            if status_code == 200:
+                return True
         except Exception:
             time.sleep(1)
+    LOGGER.debug(f"Wait time was exceeded: {host}:{port}")
+    return False
 
 
 def check_if_port_is_used_by_program(port, programs=[]):

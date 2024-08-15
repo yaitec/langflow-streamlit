@@ -1,31 +1,49 @@
 import typer
 
-app = typer.Typer()
+from enum import Enum
 
-@app.command()
+class LogLevelEnum(Enum):
+    CRITICAL = "critical"
+    ERROR = "error"
+    WARNING = "warning"
+    INFO = "info"
+    DEBUG = "debug"
+
 def run(
-    streamlit_only: bool = typer.Option(False, "--streamlit-only", help="Run only the Streamlit frontend (default: False)")
+    streamlit_only: bool = typer.Option(False, "--streamlit-only", help="Run only the Streamlit frontend (default: False)"),
+    log_level: LogLevelEnum = typer.Option("info", "--log-level", help="Defines log level of library(default: 'info')"),
+    log_file_generation: bool = typer.Option(False, "--log-file-generation", help="Creates a langflow-streamlit.log file to debug purpose(default: False)")
 ):
     """
     Run the Langflow Streamlit application.
     """
     from langflow_streamlit.managers import APIManager, LangflowManager, StreamlitManager
     from langflow_streamlit.utils.process_utils import wait_for_server_ready
-    from langflow_streamlit.utils import settings
-    import logging
+    from langflow_streamlit.utils import settings, LOGGER, logger_set_level, generate_log
+    
+    if log_file_generation:
+        generate_log()
+    else:
+        logger_set_level(log_level.value)
 
-    LOGGER = logging.getLogger(__name__)
-
-    if not streamlit_only:
-        LangflowManager.start()
-        wait_for_server_ready("localhost", settings.LANGFLOW_PORT)
-        LOGGER.debug("Langflow is running!")
-    APIManager.start()
-    wait_for_server_ready("localhost", settings.API_PORT)
-    LOGGER.debug("API backend is running!")
-    LOGGER.debug("Starting Streamlit frontend in Streamlit-only mode...")
-    StreamlitManager.start()
-    LOGGER.debug("Streamlit frontend is running. Langflow and API backend not started.")
+    try:
+        processes = []
+        if not streamlit_only:
+            processes.append(LangflowManager.start())
+            if wait_for_server_ready("localhost", settings.LANGFLOW_PORT, settings.LANGFLOW_STARTUP_TIMEOUT):
+                LOGGER.debug("Langflow is running!")
+            else:
+                LOGGER.info("Langflow was not started on the given time! try to increase the environment variable LANGFLOW_STARTUP_TIMEOUT")
+                exit(1)
+        processes.append(APIManager.start())
+        wait_for_server_ready("localhost", settings.API_PORT)
+        LOGGER.debug("API backend is running!")
+        LOGGER.debug("Starting Streamlit frontend.")
+        processes.append(StreamlitManager.start())
+        LOGGER.debug("Streamlit frontend is running.")
+        [process.join() for process in processes]
+    except KeyboardInterrupt:
+        LOGGER.debug("Exiting...")
 
 def app(args=None):
     typer_app = typer.Typer()
