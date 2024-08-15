@@ -34,7 +34,7 @@
 ```bash
 python3 -m venv env
 source env/bin/activate
-pip install langflow-streamlit==0.1.8
+pip install langflow-streamlit==0.1.8a1
 ```
 
 ### Option 2: Clone the repository and use Poetry
