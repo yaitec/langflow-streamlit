@@ -40,7 +40,7 @@ def run(
         LOGGER.debug("API backend is running!")
         LOGGER.debug("Starting Streamlit frontend.")
         processes.append(StreamlitManager.start())
-        LOGGER.debug("Streamlit frontend is running. Langflow and API backend not started.")
+        LOGGER.debug("Streamlit frontend is running.")
         [process.join() for process in processes]
     except KeyboardInterrupt:
         LOGGER.debug("Exiting...")

@@ -20,6 +20,7 @@ class LangflowManager:
                 LOGGER.error(f"Langflow startup failed. stderr: {exec_result.stderr} stdout: {exec_result.stdout}")
         except KeyboardInterrupt:
             LOGGER.info("Shutting down langflow")
+
     @classmethod
     def start(cls, args=""):
         if check_if_port_is_used_by_program(cls.port, ["langflow"]):
