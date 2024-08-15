@@ -90,9 +90,10 @@ pip install langflow-streamlit==0.1.8a1
 
 #### How to open each aplication(after running the project)
 
-- `Streamlit chat` should be running on default port 5001 and click [here](http://localhost:5001) to access in your browser.
-- `Streamlit API` should be running on default port 7881 and click [here](http://localhost:7881/docs) to access it's docs in your browser.
-- `Langflow` should be running on default port 7860 and click [here](http://localhost:7860) to access in your browser.
+Open the URLs below in your browser
+- **Streamlit Chat:**: Available at [http://localhost:5001](http://localhost:5001).
+- **Streamlit API:** The API Documentation can abe accessed at [http://localhost:7881/docs](http://localhost:7881/docs).
+- **Langflow:** Available at [http://localhost:7860](http://localhost:7860).
 
 ---
 
