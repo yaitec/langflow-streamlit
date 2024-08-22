@@ -1,23 +1,24 @@
 [tool.poetry]
 name = "langflow-streamlit"
 version = "0.1.8"
-description = ""
+description = "A Python package with a built-in web application that bridges Langflow and Streamlit, enabling seamless integration of advanced language processing with user-friendly interfaces."
 authors = ["YAITEC <contact@yaitec.org>"]
 maintainers = [
     "João Pedro M. C. Hluchan <berrytern@gmail.com>",
     "João Oliveira <joao@yaitec.org>"
 ]
+repository = "https://github.com/yaitec/langflow-streamlit"
 license = "MIT"
+readme = "README.md"
+keywords = ["langflow", "streamlit", "langchain", "openai", "gpt", "gui"]
 packages = [
     {include = "langflow_streamlit"},
     {include = "langflow-streamlit"}
 ]
-
 include = [
     "pyproject.toml",
 ]
 
-readme = "README.md"
 
 [tool.poetry.dependencies]
 python = ">=3.10,<3.13"
