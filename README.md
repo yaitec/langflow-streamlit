@@ -34,7 +34,7 @@
 ```bash
 python3 -m venv env
 source env/bin/activate
-pip install langflow-streamlit==0.1.8a1
+pip install langflow-streamlit==0.1.8
 ```
 
 ### Option 2: Clone the repository and use Poetry
@@ -90,9 +90,10 @@ pip install langflow-streamlit==0.1.8a1
 
 #### How to open each aplication(after running the project)
 
-- `Streamlit chat` should be running on default port 5001 and click [here](http://localhost:5001) to access in your browser.
-- `Streamlit API` should be running on default port 7881 and click [here](http://localhost:7881/docs) to access it's docs in your browser.
-- `Langflow` should be running on default port 7860 and click [here](http://localhost:7860) to access in your browser.
+Open the URLs below in your browser
+- **Streamlit Chat:**: Available at [http://localhost:5001](http://localhost:5001).
+- **Streamlit API:** The API Documentation can abe accessed at [http://localhost:7881/docs](http://localhost:7881/docs).
+- **Langflow:** Available at [http://localhost:7860](http://localhost:7860).
 
 ---
 
@@ -121,7 +122,7 @@ The gif below shows how to use `Listen` and `Send` components:
 Langflow provides pre-built Streamlit components that can be accessed through the Langflow store. These components enhance your Streamlit applications with powerful functionality:
 
 - **[Send](./send.md)**: Send messages to a Streamlit chat session.
-- **[Listen](./listen.md)**: Listen for incoming messages in a Streamlit chat, dynamically altering the layout of the Streamlit application.
+- **[Listen](./listen.md)**: Listen for incoming messages in a Streamlit chat, dynamically updating the layout of the Streamlit application.
 
 To use these components:
 1. Access the Langflow store within your Langflow instance.
@@ -139,13 +140,13 @@ For detailed instructions on using Streamlit components, refer to the [Usage](#u
 |----------------|---------------------------------------------------------------|---------|
 | STREAMLIT_ONLY | If True, runs only Streamlit and Streamlit API; else, runs Langflow too | False   |
 | LOG_LEVEL | Defines log level of library | "info" |
-| LOG_FILE_GENERATION | If True, creates a langflow-streamlit.log file for debug purpose and override LOG_LEVEL to 'debug' | False |
+| LOG_FILE_GENERATION | If True, creates a langflow-streamlit.log file for debug purpose and overrides LOG_LEVEL to 'debug' | False |
 
 ### Setting Environment Variables
 You can learn how to set environment variables for each alternative bellow, click in the arrow that correlated to installation option that you choosed and check how to setup it properly.
 
 <details>
-<summary>If choose <a href="#option-1-install-via-pip">pip installation</a> option</summary>
+<summary>If you choose <a href="#option-1-install-via-pip">pip installation</a> option</summary>
 these are the options that you can set:
 
    ```bash
@@ -153,7 +154,7 @@ these are the options that you can set:
    ```
 </details>
 <details>
-<summary>If choose <a href="#option-2-clone-the-repository-and-use-poetry">clone the repository</a> option</summary>
+<summary>If you choose <a href="#option-2-clone-the-repository-and-use-poetry">clone the repository</a> option</summary>
 
 - Setting it in zsh or bash
 
